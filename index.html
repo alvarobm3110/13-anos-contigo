@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f6f0ea" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="description" content="13 años contigo · Amanda & Álvaro" />
+  <title>13 años contigo · Amanda & Álvaro</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+
+
+  <main id="app">
+    <!-- PORTADA -->
+    <section id="introScreen" class="screen intro-screen is-active" aria-labelledby="introTitle">
+      <div class="intro-photo">
+        <!-- FOTO DE PORTADA: sustituye portada.jpg por vuestra foto -->
+        <img
+          src="portada.jpg"
+          alt="Amanda de espaldas, cogida de la mano de Álvaro"
+          onerror="this.style.display='none';"
+        />
+        <div class="intro-overlay"></div>
+      </div>
+
+      <div class="intro-content">
+        <p class="eyebrow">26 · 08 · 2026</p>
+        <h1 id="introTitle">13 años contigo</h1>
+        <p class="names">Amanda <span>&</span> Álvaro</p>
+        <p class="intro-subtitle">13 razones por las que te volvería a elegir</p>
+        <button id="startButton" class="button button-primary intro-button" type="button">
+          Empezar
+          <span aria-hidden="true">→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- EXPERIENCIA PRINCIPAL -->
+    <section id="reasonScreen" class="screen reason-screen" aria-live="polite">
+      <header class="topbar">
+        <button id="prevButton" class="icon-button" type="button" aria-label="Volver al motivo anterior">
+          ←
+        </button>
+
+        <div class="progress-wrap" aria-label="Progreso">
+          <span id="progressText">1 / 13</span>
+          <div class="progress-track" aria-hidden="true">
+            <div id="progressBar" class="progress-bar"></div>
+          </div>
+        </div>
+
+        <button id="homeButton" class="icon-button" type="button" aria-label="Volver a la portada">
+          13
+        </button>
+      </header>
+
+      <article id="reasonCard" class="reason-card">
+        <div id="reasonMedia" class="reason-media" hidden>
+          <img id="reasonImage" alt="" />
+          <div class="media-placeholder">
+            <span>Una foto especial aquí</span>
+            <small id="imageHint"></small>
+          </div>
+        </div>
+
+        <div class="reason-content">
+          <p id="reasonNumber" class="reason-number">Razón 01</p>
+          <h2 id="reasonTitle"></h2>
+          <div id="reasonDedication" class="dedication"></div>
+
+          <!-- MOTIVO 9: galería para fotos de Amanda con Alma -->
+          <div id="photoGallery" class="photo-gallery" hidden></div>
+
+          <button id="revealButton" class="button button-secondary reveal-button" type="button">
+            Descubrir el regalo
+            <span aria-hidden="true">♡</span>
+          </button>
+
+          <div id="giftReveal" class="gift-reveal" hidden>
+            <p class="gift-kicker">Para nosotros</p>
+            <h3 id="giftTitle"></h3>
+            <div id="giftText"></div>
+
+            <!-- MOTIVO 7: segunda revelación especial del destino -->
+            <div id="travelReveal" class="travel-reveal" hidden>
+              <p class="travel-first-line">Haz la maleta…</p>
+              <button id="destinationButton" class="destination-button" type="button">
+                Descubrir destino
+              </button>
+              <div id="destinationPanel" class="destination-panel" hidden>
+                <p class="destination-label">Nos vamos a</p>
+                <p id="destinationText" class="destination-text"></p>
+                <p class="destination-note">Fin de semana de mi cumpleaños · los tres juntos</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- MOTIVO 13: cierre progresivo -->
+          <div id="finalSequence" class="final-sequence" hidden>
+            <button id="continueFinalButton" class="button button-primary" type="button">
+              Seguir leyendo
+              <span aria-hidden="true">↓</span>
+            </button>
+          </div>
+
+          <nav class="reason-navigation" aria-label="Navegación entre motivos">
+            <button id="nextButton" class="button button-primary" type="button">
+              Siguiente razón
+              <span aria-hidden="true">→</span>
+            </button>
+          </nav>
+        </div>
+      </article>
+    </section>
+
+    <!-- PANTALLA FINAL -->
+    <section id="endingScreen" class="screen ending-screen" aria-labelledby="endingTitle">
+      <div class="ending-inner">
+        <p class="eyebrow">Amanda & Álvaro</p>
+        <h2 id="endingTitle">13 años después,<br />te sigo eligiendo.</h2>
+        <div class="ending-divider" aria-hidden="true">♡</div>
+        <p class="ending-year">Nuestro año 14 empieza aquí.</p>
+        <p class="ending-small">Y todavía nos queda muchísimo por vivir.</p>
+        <button id="restartButton" class="button button-ghost" type="button">
+          Volver al principio
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
