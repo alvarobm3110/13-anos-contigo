@@ -133,7 +133,7 @@ const reasons = [
       "Este año me has demostrado lo valiente y fuerte que eres. En uno de los años más difíciles de nuestra vida has seguido luchando, insistiendo, confiando, intentando cuidarte y trabajando cada día para mejorar."
     ],
     giftTitle: "Ahora te toca cuidarte a ti",
-    giftText: "Un masaje, tratamiento, spa o algo que sea exclusivamente para ella.",
+    giftText: "Una sesión de Head Spa con masaje para que puedas relajarte, desconectar y dejar que, por una vez, te cuiden a ti.",
     image: null
   },
   {
@@ -248,6 +248,9 @@ function renderReason(index) {
   giftTitle.textContent = reason.giftTitle;
   giftText.textContent = reason.giftText;
 
+  const giftKicker = giftReveal.querySelector(".gift-kicker");
+  giftKicker.textContent = reason.number === 10 ? "Para ti" : "Para nosotros";
+
   giftReveal.hidden = true;
   revealButton.hidden = false;
   revealButton.innerHTML = `Descubrir el regalo <span aria-hidden="true">♡</span>`;
@@ -289,11 +292,9 @@ function renderReason(index) {
     photoGallery.hidden = false;
   }
 
-  // Motivo 13: no mostramos toda la dedicatoria al entrar
+  // Motivo 13: al entrar solo mostramos el título y el botón.
   if (reason.special === "final") {
-    reasonDedication.innerHTML = `
-      <p>Hay una última razón que quiero contarte despacio.</p>
-    `;
+    reasonDedication.innerHTML = "";
     revealButton.innerHTML = `Leer la última razón <span aria-hidden="true">♡</span>`;
     nextButton.hidden = true;
   }
@@ -326,8 +327,19 @@ function revealGift() {
 
   if (reason.special === "final") {
     revealButton.hidden = true;
+
+    reasonDedication.innerHTML = "";
+    reason.finalBlocks.forEach(paragraph => {
+      const p = document.createElement("p");
+      p.textContent = paragraph;
+      reasonDedication.appendChild(p);
+    });
+
     finalSequence.hidden = false;
-    appendNextFinalBlock();
+    continueFinalButton.hidden = false;
+    continueFinalButton.innerHTML = `Descubrir nuestro año 14 <span aria-hidden="true">♡</span>`;
+
+    reasonDedication.scrollIntoView({ behavior: "smooth", block: "nearest" });
     return;
   }
 
@@ -342,32 +354,6 @@ function revealGift() {
 }
 
 function appendNextFinalBlock() {
-  const reason = reasons[currentIndex];
-
-  if (finalBlockIndex < reason.finalBlocks.length) {
-    const block = document.createElement("p");
-    block.className = "final-block";
-    if (finalBlockIndex === reason.finalBlocks.length - 1) {
-      block.classList.add("emphasis");
-    }
-    block.textContent = reason.finalBlocks[finalBlockIndex];
-
-    finalSequence.insertBefore(block, continueFinalButton);
-    finalBlockIndex += 1;
-
-    if (finalBlockIndex === reason.finalBlocks.length) {
-      continueFinalButton.innerHTML = `Descubrir nuestro año 14 <span aria-hidden="true">♡</span>`;
-    } else {
-      continueFinalButton.innerHTML = `Seguir leyendo <span aria-hidden="true">↓</span>`;
-    }
-
-    requestAnimationFrame(() => {
-      block.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    });
-    return;
-  }
-
-  // Tras leer todos los bloques, aparece el regalo final
   continueFinalButton.hidden = true;
   giftReveal.hidden = false;
   nextButton.hidden = false;
