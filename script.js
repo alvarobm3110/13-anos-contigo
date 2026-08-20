@@ -18,10 +18,10 @@ const TRAVEL_DESTINATION = "Destino sorpresa";
 
 // ===== FOTOS DEL MOTIVO 9: Amanda + Alma =====
 const GALLERY_REASON_9 = [
-  "images/alma1.jpg",
-  "images/alma2.jpg",
-  "images/alma3.jpg",
-  "images/alma4.jpg"
+  "alma1.jpg",
+  "alma2.jpg",
+  "alma3.jpg",
+  "alma4.jpg"
 ];
 
 const reasons = [
@@ -45,8 +45,8 @@ const reasons = [
     giftText: "Hacer el TikTok de tortillazos en la cara con agua en la boca, TikTok de botellazo con antifaz… ¡vamos a reírnos!",
     image: null,
     gallery: [
-      "images/motivo2_gafas.jpg",
-      "images/motivo2_sevilla.jpg"
+      "motivo2_gafas.jpg",
+      "motivo2_sevilla.jpg"
     ]
   },
   {
@@ -77,7 +77,7 @@ const reasons = [
     ],
     giftTitle: "Volver al principio",
     giftText: "Hacer una lasaña una noche como la noche en la que nos dimos nuestro primer beso.",
-    image: "images/motivo5.jpg"
+    image: "motivo5.jpg"
   },
   {
     number: 6,
@@ -111,8 +111,8 @@ const reasons = [
     giftText: "Una excursión o escapada de día a algún lugar nuevo al que podamos ir con Alma, Miko y Seven.",
     image: null,
     gallery: [
-      "images/motivo8_atardecer.jpg",
-      "images/motivo8_perros.jpg"
+      "motivo8_atardecer.jpg",
+      "motivo8_perros.jpg"
     ]
   },
   {
@@ -170,7 +170,7 @@ const reasons = [
     ],
     giftTitle: "Nuestro año 14",
     giftText: "12 planes para priorizarnos.",
-    image: "images/portada.jpg",
+    image: "portada.jpg",
     special: "final"
   }
 ];
