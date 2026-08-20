@@ -133,7 +133,7 @@ const reasons = [
       "Este año me has demostrado lo valiente y fuerte que eres. En uno de los años más difíciles de nuestra vida has seguido luchando, insistiendo, confiando, intentando cuidarte y trabajando cada día para mejorar."
     ],
     giftTitle: "Ahora te toca cuidarte a ti",
-    giftText: "Una sesión de Head Spa con masaje para que puedas relajarte, desconectar y dejar que, por una vez, te cuiden a ti.",
+    giftText: "Una sesión de head spa y masaje para que puedas relajarte, desconectar y que te cuiden",
     image: null
   },
   {
@@ -218,7 +218,6 @@ const continueFinalButton = document.getElementById("continueFinalButton");
 
 
 let currentIndex = 0;
-let finalBlockIndex = 0;
 
 function showScreen(screen) {
   [introScreen, reasonScreen, endingScreen].forEach(el => el.classList.remove("is-active"));
@@ -229,7 +228,6 @@ function showScreen(screen) {
 function renderReason(index) {
   const reason = reasons[index];
   currentIndex = index;
-  finalBlockIndex = 0;
 
   progressText.textContent = `${reason.number} / 13`;
   progressBar.style.width = `${(reason.number / 13) * 100}%`;
@@ -326,9 +324,10 @@ function revealGift() {
   const reason = reasons[currentIndex];
 
   if (reason.special === "final") {
+    // Una sola pulsación muestra toda la dedicatoria de la razón 13.
     revealButton.hidden = true;
-
     reasonDedication.innerHTML = "";
+
     reason.finalBlocks.forEach(paragraph => {
       const p = document.createElement("p");
       p.textContent = paragraph;
@@ -339,7 +338,7 @@ function revealGift() {
     continueFinalButton.hidden = false;
     continueFinalButton.innerHTML = `Descubrir nuestro año 14 <span aria-hidden="true">♡</span>`;
 
-    reasonDedication.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    reasonDedication.scrollIntoView({ behavior: "smooth", block: "start" });
     return;
   }
 
@@ -353,7 +352,7 @@ function revealGift() {
   giftReveal.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 
-function appendNextFinalBlock() {
+function revealFinalGift() {
   continueFinalButton.hidden = true;
   giftReveal.hidden = false;
   nextButton.hidden = false;
@@ -386,7 +385,7 @@ restartButton.addEventListener("click", () => {
 });
 
 revealButton.addEventListener("click", revealGift);
-continueFinalButton.addEventListener("click", appendNextFinalBlock);
+continueFinalButton.addEventListener("click", revealFinalGift);
 
 destinationButton.addEventListener("click", () => {
   destinationButton.hidden = true;
