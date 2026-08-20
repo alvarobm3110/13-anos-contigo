@@ -20,7 +20,8 @@ const TRAVEL_DESTINATION = "Destino sorpresa";
 const GALLERY_REASON_9 = [
   "images/alma1.jpg",
   "images/alma2.jpg",
-  "images/alma3.jpg"
+  "images/alma3.jpg",
+  "images/alma4.jpg"
 ];
 
 const reasons = [
@@ -42,7 +43,11 @@ const reasons = [
     ],
     giftTitle: "Noche de juegos",
     giftText: "Hacer el TikTok de tortillazos en la cara con agua en la boca, TikTok de botellazo con antifaz… ¡vamos a reírnos!",
-    image: null
+    image: null,
+    gallery: [
+      "images/motivo2_gafas.jpg",
+      "images/motivo2_sevilla.jpg"
+    ]
   },
   {
     number: 3,
@@ -72,7 +77,7 @@ const reasons = [
     ],
     giftTitle: "Volver al principio",
     giftText: "Hacer una lasaña una noche como la noche en la que nos dimos nuestro primer beso.",
-    image: "images/principio.jpg"
+    image: "images/motivo5.jpg"
   },
   {
     number: 6,
@@ -82,7 +87,7 @@ const reasons = [
     ],
     giftTitle: "Un regalo para nuestro hogar",
     giftText: "Una vez terminemos la obra, comprar un elemento decorativo nuevo que nos encante a los dos.",
-    image: "images/hogar.jpg"
+    image: null
   },
   {
     number: 7,
@@ -93,7 +98,7 @@ const reasons = [
     ],
     giftTitle: "Nuestro próximo viaje",
     giftText: "Viaje programado para el fin de semana de mi cumpleaños.",
-    image: "images/viaje.jpg",
+    image: null,
     special: "travel"
   },
   {
@@ -104,7 +109,11 @@ const reasons = [
     ],
     giftTitle: "Los cinco juntos",
     giftText: "Una excursión o escapada de día a algún lugar nuevo al que podamos ir con Alma, Miko y Seven.",
-    image: "images/familia.jpg"
+    image: null,
+    gallery: [
+      "images/motivo8_atardecer.jpg",
+      "images/motivo8_perros.jpg"
+    ]
   },
   {
     number: 9,
@@ -161,7 +170,7 @@ const reasons = [
     ],
     giftTitle: "Nuestro año 14",
     giftText: "12 planes para priorizarnos.",
-    image: "images/final.jpg",
+    image: "images/portada.jpg",
     special: "final"
   }
 ];
@@ -207,9 +216,6 @@ const photoGallery = document.getElementById("photoGallery");
 const finalSequence = document.getElementById("finalSequence");
 const continueFinalButton = document.getElementById("continueFinalButton");
 
-const backgroundMusic = document.getElementById("backgroundMusic");
-const musicButton = document.getElementById("musicButton");
-const musicLabel = document.getElementById("musicLabel");
 
 let currentIndex = 0;
 let finalBlockIndex = 0;
@@ -272,9 +278,14 @@ function renderReason(index) {
     reasonImage.removeAttribute("src");
   }
 
-  // Galería especial del motivo 9
-  if (reason.special === "gallery") {
-    buildGallery();
+  // Galerías: motivos 2 y 8 (2 fotos) y motivo 9 (4 fotos)
+  if (reason.gallery) {
+    buildGallery(reason.gallery);
+    photoGallery.classList.toggle("two-items", reason.gallery.length === 2);
+    photoGallery.hidden = false;
+  } else if (reason.special === "gallery") {
+    buildGallery(GALLERY_REASON_9);
+    photoGallery.classList.remove("two-items");
     photoGallery.hidden = false;
   }
 
@@ -290,8 +301,8 @@ function renderReason(index) {
   showScreen(reasonScreen);
 }
 
-function buildGallery() {
-  GALLERY_REASON_9.forEach((src, index) => {
+function buildGallery(images) {
+  images.forEach((src, index) => {
     const item = document.createElement("div");
     item.className = "gallery-item";
 
@@ -364,28 +375,6 @@ function appendNextFinalBlock() {
   giftReveal.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 
-async function toggleMusic() {
-  if (backgroundMusic.paused) {
-    try {
-      await backgroundMusic.play();
-      musicButton.classList.add("is-playing");
-      musicLabel.textContent = "Pausar";
-      musicButton.setAttribute("aria-label", "Pausar música");
-    } catch (error) {
-      // Si el MP3 aún no existe, no rompemos la web.
-      musicLabel.textContent = "Sin audio";
-      setTimeout(() => {
-        musicLabel.textContent = "Música";
-      }, 1800);
-    }
-  } else {
-    backgroundMusic.pause();
-    musicButton.classList.remove("is-playing");
-    musicLabel.textContent = "Música";
-    musicButton.setAttribute("aria-label", "Activar música");
-  }
-}
-
 startButton.addEventListener("click", () => renderReason(0));
 
 prevButton.addEventListener("click", () => {
@@ -419,4 +408,3 @@ destinationButton.addEventListener("click", () => {
   destinationPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
 });
 
-musicButton.addEventListener("click", toggleMusic);

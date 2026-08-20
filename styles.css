@@ -90,42 +90,6 @@ button:focus-visible {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ---------- Botón música ---------- */
-
-.music-button {
-  position: fixed;
-  z-index: 30;
-  top: max(14px, env(safe-area-inset-top));
-  right: 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 42px;
-  padding: 0 13px;
-  border: 1px solid rgba(255,255,255,0.6);
-  border-radius: 999px;
-  color: var(--text);
-  background: rgba(255, 250, 246, 0.72);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 8px 26px rgba(61, 44, 40, 0.08);
-  cursor: pointer;
-}
-
-.music-icon {
-  font-family: var(--serif);
-  font-size: 20px;
-  line-height: 1;
-}
-
-.music-button.is-playing .music-icon {
-  animation: pulseMusic 1.3s ease-in-out infinite;
-}
-
-@keyframes pulseMusic {
-  50% { transform: scale(1.18); }
-}
-
 /* ---------- Portada ---------- */
 
 .intro-screen {
@@ -155,38 +119,8 @@ button:focus-visible {
     linear-gradient(to top, rgba(0, 0, 0, 0.15), transparent 55%);
 }
 
-.photo-placeholder,
 .media-placeholder {
-  position: absolute;
-  inset: 0;
   display: none;
-  place-content: center;
-  place-items: center;
-  gap: 7px;
-  text-align: center;
-  background:
-    linear-gradient(145deg, #a9867e, #725a55 70%, #554541);
-  color: rgba(255,255,255,0.92);
-}
-
-.photo-placeholder span,
-.media-placeholder span {
-  font-family: var(--serif);
-  font-size: clamp(25px, 7vw, 42px);
-  font-style: italic;
-}
-
-.photo-placeholder small,
-.media-placeholder small {
-  font-size: 12px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  opacity: 0.7;
-}
-
-.intro-photo img.image-missing + .photo-placeholder,
-.reason-media img.image-missing + .media-placeholder {
-  display: grid;
 }
 
 .intro-content {
@@ -378,15 +312,17 @@ button:focus-visible {
 
 .reason-media {
   position: relative;
-  aspect-ratio: 4 / 3;
   overflow: hidden;
   background: #90746c;
 }
 
 .reason-media img {
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  max-height: 72dvh;
+  object-fit: contain;
+  background: #90746c;
 }
 
 .reason-content {
@@ -465,8 +401,7 @@ button:focus-visible {
 
 .photo-gallery {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  grid-template-rows: 145px 145px;
+  grid-template-columns: 1fr 1fr;
   gap: 8px;
   margin-top: 24px;
 }
@@ -474,35 +409,31 @@ button:focus-visible {
 .gallery-item {
   position: relative;
   overflow: hidden;
+  min-height: 170px;
   border-radius: 16px;
   background: #d8c8c0;
 }
 
-.gallery-item:first-child {
-  grid-row: 1 / 3;
-}
-
 .gallery-item img {
+  display: block;
   width: 100%;
   height: 100%;
+  min-height: 170px;
+  max-height: 320px;
   object-fit: cover;
 }
 
-.gallery-placeholder {
-  position: absolute;
-  inset: 0;
-  display: none;
-  place-items: center;
-  padding: 12px;
-  color: var(--muted);
-  background: linear-gradient(145deg, #eee2dc, #dfd0c9);
-  text-align: center;
-  font-family: var(--serif);
-  font-size: 14px;
+.photo-gallery.two-items .gallery-item {
+  min-height: 240px;
 }
 
-.gallery-item img.image-missing + .gallery-placeholder {
-  display: grid;
+.photo-gallery.two-items .gallery-item img {
+  min-height: 240px;
+  max-height: 360px;
+}
+
+.gallery-placeholder {
+  display: none;
 }
 
 /* ---------- Motivo 7 ---------- */
@@ -661,10 +592,6 @@ button:focus-visible {
 
   .reason-content {
     padding: 38px 42px 35px;
-  }
-
-  .reason-media {
-    aspect-ratio: 16 / 9;
   }
 
   .dedication {

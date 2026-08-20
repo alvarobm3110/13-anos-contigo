@@ -13,20 +13,6 @@
   <div class="ambient ambient-one" aria-hidden="true"></div>
   <div class="ambient ambient-two" aria-hidden="true"></div>
 
-  <!--
-    MÚSICA:
-    1) Coloca tu archivo en /audio
-    2) Llámalo musica.mp3, o cambia la ruta de abajo.
-    3) La música NUNCA comienza sola: Amanda tendrá que pulsar el botón.
-  -->
-  <audio id="backgroundMusic" loop preload="none">
-    <source src="audio/musica.mp3" type="audio/mpeg" />
-  </audio>
-
-  <button id="musicButton" class="music-button" type="button" aria-label="Activar música" title="Música">
-    <span class="music-icon" aria-hidden="true">♪</span>
-    <span id="musicLabel">Música</span>
-  </button>
 
   <main id="app">
     <!-- PORTADA -->
@@ -35,13 +21,9 @@
         <!-- FOTO DE PORTADA: sustituye images/portada.jpg por vuestra foto -->
         <img
           src="images/portada.jpg"
-          alt="Amanda y Álvaro"
-          onerror="this.classList.add('image-missing'); this.removeAttribute('src');"
+          alt="Amanda de espaldas, cogida de la mano de Álvaro"
+          onerror="this.style.display='none';"
         />
-        <div class="photo-placeholder">
-          <span>Una foto vuestra aquí</span>
-          <small>images/portada.jpg</small>
-        </div>
         <div class="intro-overlay"></div>
       </div>
 
